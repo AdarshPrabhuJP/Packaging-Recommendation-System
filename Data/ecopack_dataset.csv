@@ -1,0 +1,17 @@
+material_type,cost_per_unit,durability_score,co2_footprint,biodegradability_score,recyclable,product_weight,product_fragility,shipping_distance,recommended_use
+Cardboard Box,12,8,1.2,7,yes,500,3,300,General Packaging
+Recycled Paper Box,10,7,0.8,9,yes,300,2,150,Light Items
+Kraft Paper Mailer,6,5,0.6,8,yes,200,1,80,Soft Goods
+Biodegradable Plastic,15,7,0.9,10,no,250,2,200,Food Packaging
+Compostable Mailer,14,6,0.7,10,yes,150,1,60,Clothing
+Bubble Wrap,8,9,2.5,1,no,1000,5,400,Fragile Items
+Cornstarch Packaging,18,6,0.4,10,yes,350,2,100,Electronics
+Mushroom Packaging,20,7,0.3,10,yes,400,3,120,Premium Eco Packaging
+Recycled Plastic,11,6,1.7,3,yes,550,4,250,Heavy Items
+Air Pillows,7,8,2.2,2,no,700,4,350,Shock Absorption
+Paper Cushioning,5,6,0.9,8,yes,300,2,100,Soft Cushioning
+Wooden Crate,25,10,3.5,1,no,2000,5,1000,Industrial Goods
+Thermocol Sheets,9,7,2.8,1,no,800,4,500,Fragile Electronics
+Bioplastic Tray,13,6,1.0,9,yes,400,3,150,Food/Fragile Items
+Hemp Packaging,16,7,0.5,10,yes,450,2,120,Organic Products
+Aluminium Foil Packaging,30,9,4.0,1,yes,300,3,200,Food and Pharma
