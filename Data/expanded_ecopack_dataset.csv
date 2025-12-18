@@ -1,0 +1,61 @@
+Material Type,Cost per Unit (₹),Durability Score (0-10),CO2 Footprint (kg),Biodegradability Score (0-10),Recyclable,Product Weight (g),Product Fragility (1-5),Shipping Distance (km),Recommended Use
+Cardboard Box,660,7,1.2,8,TRUE,300,2,100,General Packaging
+Recycled Paper Box,825,6,0.8,9,TRUE,250,2,80,Light Items
+Kraft Paper Mailer,495,6,1.0,8,TRUE,150,2,60,Clothing
+Compostable Mailer,825,7,0.5,10,TRUE,200,2,100,Organic Products
+Mushroom Packaging,1155,8,0.3,10,TRUE,400,3,150,Premium Eco Packaging
+Cornstarch Packaging,990,6,0.6,9,TRUE,180,3,120,Food Packaging
+Biodegradable Plastic,1320,7,1.5,7,TRUE,220,3,200,Food and Pharma
+Hemp Packaging,1485,9,0.4,9,TRUE,350,2,180,Industrial Goods
+Bubble Wrap (Recyclable),495,8,2.5,2,TRUE,100,1,150,Fragile Items
+Air Pillows,330,7,2.0,1,FALSE,80,1,100,Soft Cushioning
+Paper Cushioning,495,6,1.1,8,TRUE,120,2,90,Soft Goods
+Thermocol Sheets,660,9,4.0,1,FALSE,150,1,200,Electronics
+Recycled Plastic,825,8,1.8,3,TRUE,280,3,250,Heavy Items
+Wooden Crate,1650,10,2.2,5,TRUE,2000,5,1000,Heavy Items
+Bioplastic Tray,990,7,1.3,8,TRUE,200,3,150,Food/Fragile Items
+Aluminium Foil Packaging,2475,9,3.0,1,TRUE,180,4,300,Fragile Electronics
+Corrugated Cardboard,495,8,1.0,8,TRUE,400,3,120,Shipping Boxes
+Molded Pulp,660,7,0.7,9,TRUE,300,2,100,Electronics Packaging
+Seaweed Packaging,1650,6,0.2,10,TRUE,150,2,80,Biodegradable Packaging
+PLA Containers,1155,7,1.4,8,TRUE,250,3,150,Product Containers
+Sugarcane Bagasse,825,7,0.9,9,TRUE,280,2,130,Eco Packaging
+Bamboo Fiber Box,1320,8,0.6,9,TRUE,350,3,160,Premium Packaging
+Recycled Cotton Bags,990,6,1.1,8,TRUE,200,2,100,Reusable Shipping Bags
+Jute Packaging,825,7,0.8,9,TRUE,300,2,120,Eco-Friendly Bags
+Wheat Straw Packaging,825,6,0.7,9,TRUE,180,3,110,Food Containers
+Cellulose Film,1155,7,1.2,8,TRUE,120,2,140,Protective Wrapping
+Starch-Based Peanuts,495,5,0.8,9,TRUE,50,1,80,Void Fill
+Recycled Glass Containers,1980,9,2.8,1,TRUE,500,5,200,Product Containers
+Metal Tins (Aluminum),1650,10,3.2,1,TRUE,400,4,250,Durable Packaging
+HDPE Containers,990,8,2.0,3,TRUE,300,3,180,Liquid Products
+PET Bottles,825,8,1.9,4,TRUE,250,3,200,Beverage Packaging
+PP Containers,990,8,2.1,3,TRUE,280,3,190,Food Packaging
+Kraft Paper Bags,495,6,0.9,8,TRUE,150,2,70,Retail Packaging
+Wax-Coated Paper,660,7,1.3,6,FALSE,200,2,100,Moisture Protection
+Recycled Cardboard Tubes,660,7,1.0,8,TRUE,250,2,110,Cylindrical Items
+Newspaper Packaging,330,5,0.6,8,TRUE,120,2,50,Cushioning Material
+Shredded Paper Fill,330,5,0.7,8,TRUE,100,1,60,Void Fill
+Coconut Fiber Packaging,990,7,0.5,9,TRUE,200,2,130,Cushioning Material
+Rice Husk Packaging,660,6,0.6,9,TRUE,180,2,100,Biodegradable Fill
+Cassava Starch Film,1155,6,1.1,9,TRUE,150,2,120,Protective Film
+Algae-Based Packaging,1815,7,0.3,10,TRUE,160,2,90,Innovative Eco Packaging
+Mycelium Foam,1485,8,0.4,10,TRUE,220,2,140,Protective Foam
+Wood Wool,825,7,0.8,8,TRUE,150,2,100,Cushioning Material
+Flax Fiber Packaging,1155,7,0.7,9,TRUE,200,2,120,Eco Packaging
+Pineapple Leaf Fiber,1320,7,0.6,9,TRUE,180,2,110,Sustainable Packaging
+Banana Fiber Packaging,990,6,0.7,9,TRUE,170,2,100,Eco-Friendly Packaging
+Coffee Chaff Packaging,660,6,0.5,9,TRUE,140,2,90,Biodegradable Fill
+Tea Waste Packaging,660,6,0.6,9,TRUE,150,2,95,Compostable Packaging
+Expanded Polystyrene (EPS),495,9,3.8,1,FALSE,120,1,180,Protective Packaging
+Polyethylene Foam,660,8,2.8,2,FALSE,140,1,160,Cushioning
+Corrugated Plastic Sheets,990,9,2.5,3,TRUE,350,3,200,Reusable Packaging
+Honeycomb Paper,825,8,0.9,9,TRUE,180,2,110,Lightweight Protection
+Edge Protectors (Cardboard),495,7,1.0,8,TRUE,200,2,100,Corner Protection
+Stretch Film (Recyclable),660,7,2.2,3,TRUE,160,2,150,Pallet Wrapping
+Biodegradable Bubble Wrap,825,7,1.8,7,TRUE,110,1,140,Eco Cushioning
+Paper Tape,330,5,0.5,9,TRUE,50,1,50,Sealing
+Gummed Paper Tape,495,6,0.6,9,TRUE,60,1,60,Water-Activated Sealing
+Cardboard Dividers,495,7,0.8,8,TRUE,150,2,80,Product Separation
+Foam Inserts,825,8,2.5,2,FALSE,200,2,120,Custom Protection
+Biodegradable Mailers,990,7,1.2,9,TRUE,180,2,100,E-commerce Shipping
