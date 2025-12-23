@@ -1,8 +1,3 @@
-"""
-Material Ranking System
-Ranks materials based on ML predictions and multiple criteria
-"""
-
 import sys
 from pathlib import Path
 import numpy as np
@@ -14,9 +9,6 @@ from src.database_utils import get_all_materials
 
 
 class MaterialRanker:
-    """
-    Intelligent material ranking system using ML predictions.
-    """
     
     def __init__(self):
         """Load trained models and scaler."""
@@ -29,9 +21,10 @@ class MaterialRanker:
         print("✓ Models and scaler loaded")
     
     def prepare_features(self, material):
-        """Prepare features for a single material."""
         features = [
+            material['cost_per_unit'],
             material['durability_score'],
+            material['co2_footprint'],
             material['biodegradability_score'],
             material['product_weight'],
             material['product_fragility'],
@@ -41,20 +34,7 @@ class MaterialRanker:
         return np.array(features).reshape(1, -1)
     
     def rank_materials(self, requirements=None, top_n=10):
-        """
-        Rank all materials based on predictions and requirements.
-        
-        Args:
-            requirements: dict with optional keys:
-                - max_cost: maximum budget
-                - max_co2: maximum CO2 tolerance
-                - min_durability: minimum durability needed
-                - eco_priority: 'high', 'medium', 'low'
-            top_n: number of top materials to return
-        
-        Returns:
-            list of ranked materials with scores
-        """
+   
         print("\n" + "=" * 70)
         print("MATERIAL RANKING SYSTEM")
         print("=" * 70)
@@ -119,6 +99,9 @@ class MaterialRanker:
                 weights['bio'] * bio_score +
                 recyclable_bonus
             )
+            
+            # Normalize to 0-1 range (max possible score is 1.1 with recyclable bonus)
+            composite_score = composite_score / 1.1
             
             # Apply filters
             passes_filters = True
@@ -213,7 +196,7 @@ def demo_ranking():
     ranker.display_rankings(balanced_rankings)
     
     print("\n" + "=" * 70)
-    print("✅ RANKING SYSTEM DEMO COMPLETE!")
+    print("RANKING COMPLETE!")
     print("=" * 70)
 
 

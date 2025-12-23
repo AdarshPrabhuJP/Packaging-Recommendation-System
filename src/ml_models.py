@@ -1,8 +1,3 @@
-"""
-Machine Learning Models for Packaging Recommendation System
-Implements classification and regression models
-"""
-
 import sys
 from pathlib import Path
 import numpy as np
@@ -10,20 +5,14 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import accuracy_score, classification_report, mean_squared_error, r2_score
+from sklearn.metrics import accuracy_score, mean_squared_error, r2_score
 import joblib
 
-# Add parent directory to path
 sys.path.append(str(Path(__file__).parent.parent))
-
 from src.database_utils import get_all_materials
 
 
 def prepare_data():
-    """
-    Prepare data for ML models.
-    Returns features (X) and targets (y) for classification and regression.
-    """
     print("\n" + "=" * 60)
     print("PREPARING DATA FOR ML MODELS")
     print("=" * 60)

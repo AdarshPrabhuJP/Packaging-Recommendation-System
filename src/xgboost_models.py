@@ -1,8 +1,3 @@
-"""
-XGBoost Models with Feature Scaling
-Module 4: AI Recommendation Model (ML-Based)
-"""
-
 import sys
 from pathlib import Path
 import numpy as np
@@ -34,12 +29,13 @@ def prepare_data_with_scaling():
         'recommended_use'
     ])
     
-    print(f"\n✓ Loaded {len(df)} materials")
+    print(f"\n[OK] Loaded {len(df)} materials")
     
-    # Features
+    # Use SAME features as Random Forest for fair comparison
     feature_columns = [
-        'durability_score', 'biodegradability_score',
-        'product_weight', 'product_fragility', 'shipping_distance'
+        'cost_per_unit', 'durability_score', 'co2_footprint',
+        'biodegradability_score', 'product_weight', 
+        'product_fragility', 'shipping_distance'
     ]
     
     X = df[feature_columns].values
@@ -55,8 +51,8 @@ def prepare_data_with_scaling():
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
-    print(f"✓ Features scaled (mean=0, std=1)")
-    print(f"✓ Feature shape: {X_scaled.shape}")
+    print(f"[OK] Features scaled (mean=0, std=1)")
+    print(f"[OK] Feature shape: {X_scaled.shape}")
     
     return X_scaled, y_cost, y_co2, scaler, df
 
@@ -78,8 +74,8 @@ def train_xgboost_models(X, y_cost, y_co2):
         X, y_co2, test_size=0.2, random_state=42
     )
     
-    print(f"\n✓ Training set: {len(X_train)} samples")
-    print(f"✓ Test set: {len(X_test)} samples")
+    print(f"\n[OK] Training set: {len(X_train)} samples")
+    print(f"[OK] Test set: {len(X_test)} samples")
     
     # Train Cost Predictor
     print("\n[1/2] Training XGBoost Cost Predictor...")
@@ -97,10 +93,10 @@ def train_xgboost_models(X, y_cost, y_co2):
     cost_rmse = np.sqrt(mean_squared_error(y_cost_test, cost_pred))
     cost_mae = mean_absolute_error(y_cost_test, cost_pred)
     
-    print(f"✓ Cost Model Trained")
-    print(f"  R² Score: {cost_r2:.4f}")
-    print(f"  RMSE: ₹{cost_rmse:.2f}")
-    print(f"  MAE: ₹{cost_mae:.2f}")
+    print(f"[OK] Cost Model Trained")
+    print(f"  R2 Score: {cost_r2:.4f}")
+    print(f"  RMSE: Rs{cost_rmse:.2f}")
+    print(f"  MAE: Rs{cost_mae:.2f}")
     
     # Train CO2 Predictor
     print("\n[2/2] Training XGBoost CO₂ Predictor...")
