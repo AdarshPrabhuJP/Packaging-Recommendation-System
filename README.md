@@ -1,32 +1,130 @@
 # Packaging Recommendation System
 
-**Infosys Virtual Internship Project**  
-AI-powered system to recommend eco-friendly packaging materials based on sustainability, cost, and performance criteria.
+An intelligent ML-based system for recommending optimal packaging materials based on product characteristics, cost, and environmental impact.
+
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue.svg)](https://www.postgresql.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.3.2-orange.svg)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-2.0.3-green.svg)](https://xgboost.readthedocs.io/)
 
 ---
 
-## 📋 Project Overview
+## 🎯 Overview
 
-This system helps businesses select the most suitable packaging materials by analyzing:
-- **Environmental Impact** - CO₂ footprint, biodegradability, recyclability
-- **Cost Efficiency** - Budget constraints and value optimization
-- **Performance** - Durability, weight capacity, fragility handling
-- **Use Cases** - Electronics, food, cosmetics, industrial goods
+This system uses machine learning to recommend the most suitable packaging materials by analyzing cost, durability, environmental impact, and product requirements. It employs Random Forest and XGBoost algorithms with an intelligent ranking system.
+
+**Key Features:**
+- 61 packaging materials database
+- ML models with 96-98% accuracy
+- Multi-criteria ranking system
+- Real-time predictions
 
 ---
 
-## 🎯 Features
+## 📋 Prerequisites
 
-### ✅ Implemented (Days 1-3)
+Before you begin, ensure you have:
 
-- **PostgreSQL Database** - 22 packaging materials with comprehensive attributes
-- **Feature Engineering** - 3 calculated metrics:
-  - CO₂ Impact Index (0-100)
-  - Cost Efficiency Index (0-100)
-  - Material Suitability Score (0-100)
-- **Smart Recommendations** - Filter by sustainability, budget, category
-- **Alternative Finder** - Discover eco-friendly alternatives
-- **Material Comparison** - Side-by-side analysis
+- **Python 3.11+** installed
+- **PostgreSQL 16+** installed and running
+- **pip** package manager
+- **Git** (for cloning)
+
+---
+
+## 🚀 Quick Start
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/springboardmentor123455-maker/Packaging-Recommendation-System.git
+cd Packaging-Recommendation-System
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Set Up PostgreSQL Database
+
+**Create Database:**
+```bash
+createdb packaging_db
+```
+
+**Initialize Schema:**
+```bash
+psql -d packaging_db -f database/schema.sql
+```
+
+**Import Data:**
+```bash
+python database/import_data.py
+```
+
+### 4. Configure Environment
+
+```bash
+# Copy example environment file
+cp .env.example .env
+
+# Edit .env with your database credentials
+# DB_NAME=packaging_db
+# DB_USER=your_username
+# DB_PASSWORD=your_password
+# DB_HOST=localhost
+# DB_PORT=5432
+```
+
+### 5. Verify Installation
+
+```bash
+# Test database connection
+python src/database_utils.py
+
+# Should show: 61 materials, 85.2% recyclable
+```
+
+---
+
+## 💻 Usage
+
+### Train ML Models
+
+**Random Forest Models:**
+```bash
+python src/ml_models.py
+```
+
+**XGBoost Models:**
+```bash
+python src/xgboost_models.py
+```
+
+### Get Material Rankings
+
+```bash
+python src/ranking_system.py
+```
+
+### Make Predictions
+
+```bash
+python src/inference.py
+```
+
+---
+
+## 📊 Model Performance
+
+| Model | Metric | Score |
+|-------|--------|-------|
+| Random Forest Cost | R² | 0.9655 |
+| Random Forest Cost | MAE | ₹35.17 |
+| Random Forest CO₂ | R² | 0.9865 |
+| Random Forest CO₂ | MAE | 0.046 kg |
 
 ---
 
@@ -34,156 +132,79 @@ This system helps businesses select the most suitable packaging materials by ana
 
 ```
 Packaging-Recommendation-System/
-├── Data/                    # Dataset CSV files (22 materials)
-├── database/               # PostgreSQL setup scripts
-│   ├── config.py          # Database connection
-│   ├── schema.sql         # Table definitions
-│   ├── init_db.py         # Initialization script
-│   └── import_data.py     # Data import script
-├── src/                   # Source code
-│   ├── database_utils.py  # Query utilities
-│   ├── feature_engineering.py  # Metric calculations
-│   ├── recommendation_queries.py  # Recommendation logic
-│   └── test_recommendations.py  # Demo script
-├── .env.example           # Environment template
-├── requirements.txt       # Python dependencies
-└── Project_Documentation.md  # Detailed documentation
+├── Data/                    # Dataset files
+├── database/                # Database setup
+│   ├── config.py           # DB connection
+│   ├── schema.sql          # DB schema
+│   ├── init_db.py          # Initialize DB
+│   └── import_data.py      # Import data
+├── src/                    # Source code
+│   ├── ml_models.py        # Random Forest
+│   ├── xgboost_models.py   # XGBoost
+│   ├── ranking_system.py   # Ranking
+│   └── inference.py        # Predictions
+├── models/                 # Trained models
+├── visualizations/         # Charts
+├── requirements.txt        # Dependencies
+└── README.md              # This file
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🔧 Troubleshooting
 
-### Prerequisites
-- Python 3.8+
-- PostgreSQL 12+
+### Database Connection Error
 
-### Installation
+```bash
+# Check PostgreSQL is running
+pg_isready
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/Packaging-Recommendation-System.git
-   cd Packaging-Recommendation-System
-   ```
-
-2. **Install dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. **Set up PostgreSQL**
-   ```sql
-   CREATE DATABASE packaging_recommendation_db;
-   ```
-
-4. **Configure environment**
-   ```bash
-   copy .env.example .env
-   # Edit .env with your PostgreSQL credentials
-   ```
-
-5. **Initialize database**
-   ```bash
-   python database/init_db.py
-   python database/import_data.py
-   ```
-
-6. **Run demo**
-   ```bash
-   python src/test_recommendations.py
-   ```
-
----
-
-## 💡 Usage Examples
-
-### Get Eco-Friendly Materials
-```python
-from src.recommendation_queries import get_eco_friendly_materials
-
-materials = get_eco_friendly_materials(
-    min_co2_index=70,
-    min_biodegradability=8,
-    recyclable_only=True
-)
+# Verify credentials in .env file
+cat .env
 ```
 
-### Get Budget-Friendly Options
-```python
-from src.recommendation_queries import get_materials_by_budget
+### Import Error
 
-materials = get_materials_by_budget(max_cost=15, min_suitability_score=60)
+```bash
+# Ensure you're in project root
+cd Packaging-Recommendation-System
+
+# Reinstall dependencies
+pip install -r requirements.txt
 ```
 
-### Get Materials for Electronics
-```python
-from src.recommendation_queries import get_materials_by_category
+### Model Not Found
 
-materials = get_materials_by_category('Electronics', top_n=5)
+```bash
+# Train models first
+python src/ml_models.py
+python src/xgboost_models.py
 ```
 
 ---
 
-## 📊 Dataset
+## 📖 Documentation
 
-**Total Materials:** 22  
-**Sources:** 2 CSV files
-- `ecopack_dataset.csv` - 16 general eco-friendly materials
-- `Detailed_Autoliv_Sustainable_Packaging_Dataset.csv` - 6 industrial materials
-
-**Attributes:**
-- Material type, cost, durability, weight capacity
-- CO₂ footprint, biodegradability, recyclability
-- Product fragility, shipping distance, recommended use
-
----
-
-## 🛠️ Technology Stack
-
-- **Database:** PostgreSQL
-- **Backend:** Python 3.8+
-- **Libraries:** psycopg2, pandas, python-dotenv
-- **Version Control:** Git
-
----
-
-## 📈 Feature Engineering
-
-### CO₂ Impact Index
-Formula: `50% CO₂ footprint + 40% biodegradability + 10% recyclability`
-
-### Cost Efficiency Index
-Formula: `40% cost + 30% biodegradability + 20% durability + 10% recyclability`
-
-### Material Suitability Score
-Formula: `40% sustainability + 30% cost + 30% durability`
-
----
-
-## 📝 Documentation
-
-- [Project Documentation](Project_Documentation.md) - Detailed day-by-day progress
-- [Database Setup Guide](database/README.md) - PostgreSQL configuration
+For detailed documentation, see [Project_Documentation.md](Project_Documentation.md)
 
 ---
 
 ## 🤝 Contributing
 
-This is an internship project. For questions or suggestions, please open an issue.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-## 📄 License
+## 📝 License
 
-See [LICENSE](LICENSE) file for details.
-
----
-
-## 👤 Author
-
-**Adarsh Prabhu JP**  
-Infosys Virtual Internship - Packaging Recommendation System
+This project is licensed under the MIT License.
 
 ---
 
-**Last Updated:** December 4, 2025
+## 📧 Contact
+
+For questions or feedback, please open an issue on GitHub.
+
+---
+
+**Built with ❤️ using Python, PostgreSQL, and Machine Learning**
