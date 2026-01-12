@@ -20,15 +20,15 @@ class MaterialRanker:
         
         print("✓ Models and scaler loaded")
     
-    def prepare_features(self, material):
+    def prepare_features(self, material, product_weight=100, product_fragility=3, shipping_distance=100):
         features = [
             material['cost_per_unit'],
             material['durability_score'],
             material['co2_footprint'],
             material['biodegradability_score'],
-            material['product_weight'],
-            material['product_fragility'],
-            material['shipping_distance'],
+            product_weight,
+            product_fragility,
+            shipping_distance,
             int(material['recyclable'])
         ]
         return np.array(features).reshape(1, -1)
@@ -55,13 +55,14 @@ class MaterialRanker:
             requirements = {}
         
         eco_priority = requirements.get('eco_priority', 'medium')
+        product_weight = requirements.get('product_weight', 100)
+        product_fragility = requirements.get('product_fragility', 3)
+        shipping_distance = requirements.get('shipping_distance', 100)
         
-        # Calculate scores for each material
         ranked_materials = []
         
         for idx, row in df.iterrows():
-            # Prepare features
-            features = self.prepare_features(row)
+            features = self.prepare_features(row, product_weight, product_fragility, shipping_distance)
             features_scaled = self.scaler.transform(features)
             
             # Predict cost and CO2
@@ -71,25 +72,33 @@ class MaterialRanker:
             # Calculate individual scores (0-1 scale)
             # Lower cost = higher score
             cost_score = 1 - (pred_cost / float(df['cost_per_unit'].max()))
-            
-            # Lower CO2 = higher score
             co2_score = 1 - (pred_co2 / float(df['co2_footprint'].max()))
-            
-            # Higher durability = higher score
             durability_score = row['durability_score'] / 10
-            
-            # Higher biodegradability = higher score
             bio_score = row['biodegradability_score'] / 10
-            
-            # Recyclable bonus
             recyclable_bonus = 0.1 if row['recyclable'] else 0
             
-            # Weighted composite score based on eco priority
+            # Add bonuses based on product characteristics
+            fragility_match = 0
+            if product_fragility >= 4 and row['durability_score'] >= 8:
+                fragility_match = 0.15
+            elif product_fragility <= 2 and row['durability_score'] <= 6:
+                fragility_match = 0.1
+            
+            weight_match = 0
+            if product_weight > 1000 and row['durability_score'] >= 7:
+                weight_match = 0.1
+            elif product_weight < 200 and row['biodegradability_score'] >= 7:
+                weight_match = 0.1
+            
+            distance_penalty = 0
+            if shipping_distance > 1000 and row['co2_footprint'] > 2.0:
+                distance_penalty = -0.15
+            
             if eco_priority == 'high':
-                weights = {'cost': 0.2, 'co2': 0.4, 'durability': 0.2, 'bio': 0.2}
+                weights = {'cost': 0.15, 'co2': 0.45, 'durability': 0.2, 'bio': 0.2}
             elif eco_priority == 'low':
-                weights = {'cost': 0.5, 'co2': 0.1, 'durability': 0.3, 'bio': 0.1}
-            else:  # medium
+                weights = {'cost': 0.55, 'co2': 0.05, 'durability': 0.3, 'bio': 0.1}
+            else:
                 weights = {'cost': 0.3, 'co2': 0.3, 'durability': 0.2, 'bio': 0.2}
             
             composite_score = (
@@ -97,14 +106,27 @@ class MaterialRanker:
                 weights['co2'] * co2_score +
                 weights['durability'] * durability_score +
                 weights['bio'] * bio_score +
-                recyclable_bonus
+                recyclable_bonus +
+                fragility_match +
+                weight_match +
+                distance_penalty
             )
             
-            # Normalize to 0-1 range (max possible score is 1.1 with recyclable bonus)
-            composite_score = composite_score / 1.1
+            composite_score = max(0, min(1, composite_score))
             
             # Apply filters
             passes_filters = True
+            
+            # Practical suitability check for heavy products
+            unsuitable_for_heavy = ['Air Pillows', 'Aluminum Foil Packaging', 'Tissue Paper', 
+                                   'Kraft Paper', 'Wax Paper', 'Parchment Paper']
+            if product_weight > 2000 and row['material_type'] in unsuitable_for_heavy:
+                passes_filters = False
+            
+            # Fragile products need durable materials
+            if product_fragility >= 4 and row['durability_score'] < 6:
+                passes_filters = False
+            
             if 'max_cost' in requirements and pred_cost > requirements['max_cost']:
                 passes_filters = False
             if 'max_co2' in requirements and pred_co2 > requirements['max_co2']:
