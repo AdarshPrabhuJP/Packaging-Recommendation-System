@@ -1,0 +1,28 @@
+.metric-card {
+    border-left: 4px solid #0d6efd;
+    transition: transform 0.2s;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card {
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+canvas {
+    max-height: 300px;
+}
+
+@media print {
+    .navbar, .btn {
+        display: none;
+    }
+}

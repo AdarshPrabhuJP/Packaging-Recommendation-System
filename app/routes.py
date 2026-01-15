@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, render_template, send_file
 import sys
 from pathlib import Path
 
@@ -7,6 +7,9 @@ from app.models import MLModels
 from app.utils import success_response, error_response, validate_product_input, calculate_environmental_score
 from src.database_utils import get_all_materials, get_material_by_id
 from src.ranking_system import MaterialRanker
+from app.analytics import Analytics
+from app.pdf_generator import generate_sustainability_report
+from app.excel_generator import generate_excel_report
 
 api_bp = Blueprint('api', __name__)
 
@@ -186,3 +189,65 @@ def environmental_score():
 @api_bp.route('/health', methods=['GET'])
 def health_check():
     return success_response({"status": "healthy"}, "API is running")
+
+@api_bp.route('/dashboard-data', methods=['GET'])
+def get_dashboard_data():
+    try:
+        analytics = Analytics()
+        
+        data = {
+            'key_metrics': analytics.get_key_metrics(),
+            'co2_reduction': analytics.calculate_co2_reduction(),
+            'cost_savings': analytics.calculate_cost_savings(),
+            'material_trends': analytics.get_material_usage_trends(),
+            'sustainability_metrics': analytics.get_sustainability_metrics(),
+            'top_materials': analytics.get_top_materials()
+        }
+        
+        return success_response(data)
+    except Exception as e:
+        return error_response(str(e), 500)
+
+@api_bp.route('/export/pdf', methods=['GET'])
+def export_pdf():
+    try:
+        analytics = Analytics()
+        
+        analytics_data = {
+            'key_metrics': analytics.get_key_metrics(),
+            'co2_reduction': analytics.calculate_co2_reduction(),
+            'cost_savings': analytics.calculate_cost_savings()
+        }
+        
+        pdf_buffer = generate_sustainability_report(analytics_data)
+        
+        return send_file(
+            pdf_buffer,
+            mimetype='application/pdf',
+            as_attachment=True,
+            download_name=f'sustainability_report.pdf'
+        )
+    except Exception as e:
+        return error_response(str(e), 500)
+
+@api_bp.route('/export/excel', methods=['GET'])
+def export_excel():
+    try:
+        analytics = Analytics()
+        
+        analytics_data = {
+            'key_metrics': analytics.get_key_metrics(),
+            'co2_reduction': analytics.calculate_co2_reduction(),
+            'cost_savings': analytics.calculate_cost_savings()
+        }
+        
+        excel_buffer = generate_excel_report(analytics_data, analytics.df)
+        
+        return send_file(
+            excel_buffer,
+            mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            as_attachment=True,
+            download_name=f'analytics_data.xlsx'
+        )
+    except Exception as e:
+        return error_response(str(e), 500)
