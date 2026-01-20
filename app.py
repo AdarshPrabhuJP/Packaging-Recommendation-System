@@ -7,24 +7,8 @@ from pathlib import Path
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-# Auto-initialize database on startup
-def init_database():
-    try:
-        from database.init_db import create_tables
-        from database.import_data import import_materials_data
-        print("Initializing database...")
-        create_tables()
-        import_materials_data()
-        print("✓ Database initialized successfully")
-    except Exception as e:
-        print(f"Database initialization: {e}")
-
 # Create Flask application instance
 app = create_app()
-
-# Initialize database on startup
-if os.getenv('DATABASE_URL'):
-    init_database()
 
 @app.route('/')
 def index():
