@@ -8,12 +8,13 @@ document.getElementById('fragility').addEventListener('input', function (e) {
 document.getElementById('productForm').addEventListener('submit', async function (e) {
     e.preventDefault();
 
+    const categoryElement = document.getElementById('category');
     const productData = {
         product_weight: parseInt(document.getElementById('weight').value),
         product_fragility: parseInt(document.getElementById('fragility').value),
         shipping_distance: parseInt(document.getElementById('distance').value),
         priority: document.getElementById('priority').value,
-        category: document.getElementById('category').value,
+        category: categoryElement ? categoryElement.value : 'general',
         top_n: 5
     };
 
