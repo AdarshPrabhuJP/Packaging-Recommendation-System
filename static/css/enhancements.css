@@ -328,4 +328,40 @@ canvas {
     .container {
         padding: 1.5rem;
     }
+}eight: 3rem;
+    border-width: 0.3rem;
+    border-color: #0f9b0f;
+    border-right-color: transparent;
+}
+
+/* Alert */
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 1.25rem;
+    font-weight: 500;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+/* Charts */
+canvas {
+    background: white;
+    border: 2px solid rgba(15, 155, 15, 0.1);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .metrics-row {
+        flex-direction: column;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
 }
