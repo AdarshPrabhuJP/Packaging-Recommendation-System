@@ -13,6 +13,7 @@ document.getElementById('productForm').addEventListener('submit', async function
         product_fragility: parseInt(document.getElementById('fragility').value),
         shipping_distance: parseInt(document.getElementById('distance').value),
         priority: document.getElementById('priority').value,
+        category: document.getElementById('category').value,
         top_n: 5
     };
 
