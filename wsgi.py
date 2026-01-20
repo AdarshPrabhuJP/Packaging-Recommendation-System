@@ -1,7 +1,7 @@
 from app import create_app
 from flask import render_template
 
-# Create Flask application instance
+# Create Flask application instance for WSGI deployment
 app = create_app()
 
 @app.route('/')
