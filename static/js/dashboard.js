@@ -2,7 +2,12 @@ let co2Chart, costChart, materialPieChart, sustainabilityChart;
 
 async function loadDashboardData() {
     try {
-        const response = await fetch('http://localhost:5000/api/dashboard-data');
+        // Dynamic API URL based on environment
+        const apiUrl = window.location.hostname === 'localhost' 
+            ? 'http://localhost:5000/api/dashboard-data'
+            : '/api/dashboard-data';
+            
+        const response = await fetch(apiUrl);
         const result = await response.json();
 
         if (result.status === 'success') {
