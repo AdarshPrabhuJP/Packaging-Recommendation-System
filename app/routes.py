@@ -23,12 +23,21 @@ def init_models():
     if material_ranker is None:
         material_ranker = MaterialRanker()
 
-@api_bp.route('/recommend', methods=['POST'])
+@api_bp.route('/recommend', methods=['GET', 'POST'])
 def recommend_materials():
     init_models()
     
     try:
-        data = request.get_json()
+        # Handle GET request with default values for testing
+        if request.method == 'GET':
+            data = {
+                'product_weight': 500,
+                'product_fragility': 3,
+                'shipping_distance': 200,
+                'priority': 'balanced'
+            }
+        else:
+            data = request.get_json()
         
         is_valid, error_msg = validate_product_input(data)
         if not is_valid:

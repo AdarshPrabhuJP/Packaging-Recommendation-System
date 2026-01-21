@@ -1,0 +1,7 @@
+[
+  {"id": 1, "material_type": "Cardboard", "cost_per_unit": 45.50, "durability_score": 7, "co2_footprint": 0.85, "biodegradability_score": 8, "recyclable": true, "product_weight": 500, "product_fragility": 3, "shipping_distance": 200, "recommended_use": "General packaging"},
+  {"id": 2, "material_type": "Bubble Wrap", "cost_per_unit": 120.75, "durability_score": 6, "co2_footprint": 2.10, "biodegradability_score": 2, "recyclable": false, "product_weight": 100, "product_fragility": 5, "shipping_distance": 150, "recommended_use": "Fragile items"},
+  {"id": 3, "material_type": "Paper Bags", "cost_per_unit": 25.30, "durability_score": 4, "co2_footprint": 0.45, "biodegradability_score": 9, "recyclable": true, "product_weight": 200, "product_fragility": 2, "shipping_distance": 100, "recommended_use": "Light items"},
+  {"id": 4, "material_type": "Plastic Containers", "cost_per_unit": 85.20, "durability_score": 9, "co2_footprint": 3.20, "biodegradability_score": 1, "recyclable": false, "product_weight": 800, "product_fragility": 4, "shipping_distance": 300, "recommended_use": "Liquid products"},
+  {"id": 5, "material_type": "Biodegradable Foam", "cost_per_unit": 150.00, "durability_score": 8, "co2_footprint": 1.20, "biodegradability_score": 9, "recyclable": true, "product_weight": 300, "product_fragility": 4, "shipping_distance": 250, "recommended_use": "Eco-friendly packaging"}
+]
