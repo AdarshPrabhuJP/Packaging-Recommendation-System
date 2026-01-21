@@ -47,6 +47,16 @@ def get_db_connection():
     Raises:
         psycopg2.Error: If connection fails
     """
+    # Try DATABASE_URL first (Render format)
+    database_url = os.getenv('DATABASE_URL')
+    if database_url:
+        try:
+            conn = psycopg2.connect(database_url)
+            return conn
+        except psycopg2.Error as e:
+            print(f"Error connecting with DATABASE_URL: {e}")
+    
+    # Fallback to individual environment variables
     config = DatabaseConfig()
     try:
         conn = psycopg2.connect(**config.get_connection_params())
