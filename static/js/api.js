@@ -1,4 +1,7 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+// Detect if we're running locally or on Render
+const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:5000/api' 
+    : '/api';
 
 async function getRecommendations(productData) {
     const response = await fetch(`${API_BASE_URL}/recommend`, {
